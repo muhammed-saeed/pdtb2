@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='mypackage',
+    name='pdtb2',
     version='0.1',
     packages=find_packages(),
     description='A Python package for processing PDTB-style annotations',
