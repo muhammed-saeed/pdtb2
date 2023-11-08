@@ -108,3 +108,45 @@ case you need to connect with the external files.
 
 There's a much fuller overview here: 
 [http://compprag.christopherpotts.net/swda.html](http://compprag.christopherpotts.net/swda.html)
+
+
+```python
+# Initialize the CorpusReader with your CSV file
+import pandas as pd
+from pdtb import CorpusReader
+
+corpus_reader = CorpusReader('pdtb2.csv')
+df = pd.read_csv("pdtb2.csv", low_memory=False)
+
+# Create lists to hold the extracted data
+arg1_rawtexts = []
+arg2_rawtexts = []
+connective_rawtexts = []
+FullRawText = []
+
+# Iterate over the data
+for datum in corpus_reader.iter_data(display_progress=False):
+    # Extract the required fields and append them to the respective lists
+    arg1_rawtexts.append(datum.Arg1_RawText)
+    arg2_rawtexts.append(datum.Arg2_RawText)
+    connective_rawtexts.append(datum.Connective_RawText)
+    FullRawText.append(datum.FullRawText)
+
+# Now arg1_rawtexts, arg2_rawtexts, and connective_rawtexts contain the data from the specified columns
+print(f"len of Arg1 {len(arg1_rawtexts)}")
+FullTextEng = df['FullRawText'].tolist()
+
+# Your code for loading data into FullRawText and FullTextEng lists
+
+# Compare the entire lists
+if FullRawText == FullTextEng:
+    print("FullRawText and FullTextEng contain the same values.")
+else:
+    print("FullRawText and FullTextEng do not contain the same values.")
+
+dfConnectiveRawText  = df['Connective_RawText'].tolist()
+if connective_rawtexts == dfConnectiveRawText:
+    print("connectiveRawText and DfConnectiveRawText contain the same values.")
+else:
+    print("connectiveRawText and DfConnectiveRawText do not contain the same values.")
+```
